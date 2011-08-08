@@ -2,12 +2,13 @@
 <%@page import="com.appspot.choncheol.jdo.MemoriesJDO"%>
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%
-	List<MemoriesJDO> resultList = (List<MemoriesJDO>) request.getAttribute("resultList");
+	MemoriesJDO resultJdo = (MemoriesJDO) request.getAttribute("resultJdo");
 %>
 <!DOCTYPE html>
 <html>
   <head>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<link type="text/css" rel="stylesheet" href="/css/main.css" />
     <title>ChonCheol[촌철].appspot.com</title>
 
 	<script>
@@ -26,10 +27,24 @@
     <nav>
 
     </nav>    
-	<p>&nbsp;</p>
+
     <section>
     	<article>
-			 Coming soon..
+<%
+	if ( resultJdo == null || "".equals(resultJdo.getWiseAuthor())) {
+		out.println("No data Found<br/>");
+	}else {
+%>
+		[ No : <%=resultJdo.getId()%> ] <br/>
+		[ 명언 : <%=resultJdo.getWiseContent() %> ]  - <%=resultJdo.getWiseAuthor() %><br/>	
+		<br/>
+		<% if (!"".equals(resultJdo.getWiseContentOrg())) { %>
+			[ 원문 : <%=resultJdo.getWiseContentOrg() %> ] - <%=resultJdo.getWiseAuthorOrg() %><br/>
+		<% } %>
+<%				
+	}
+%>
+
     	</article>
     </section>	
 

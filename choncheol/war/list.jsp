@@ -1,3 +1,4 @@
+<%@page import="com.appspot.choncheol.comm.DateUtil"%>
 <%@page import="java.util.List"%>
 <%@page import="com.appspot.choncheol.jdo.MemoriesJDO"%>
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
@@ -8,7 +9,8 @@
 <html>
   <head>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-    <title>ChonCheol[촌철].appspot.com</title>
+	<link type="text/css" rel="stylesheet" href="/css/main.css" />
+	<title>ChonCheol[촌철].appspot.com</title>
 
 	<script>
 	</script>
@@ -29,31 +31,46 @@
 	<p>&nbsp;</p>
     <section>
     	<article>
+    		<table>
+    			<tr>
+    				<th>Id</th>
+    				<th>명언</th>
+    				<th>출처</th>
+    				<th>명언 (원문)</th>
+    				<th>출처 (원문)</th>
+    				<th>글 올린 이</th>
+    				<th>글 올린 날</th> 
+    				<th>글 고친 날</th>
+    				<th>글 고친 이</th>
+    				<th>삭제여부</th>
+    			</tr>
 <%
-
-	System.out.println("resultList:"+resultList.size());
 	if ( resultList == null || resultList.isEmpty()) {
-		out.println("No data Found<br/>");
+%>
+				<tr>
+					<td colspan="10">작성된 글이 없습니다.</td>
+				</tr>
+<% 
 	}else {
 
 		for (MemoriesJDO resultJdo : resultList ) {
 %>
-<%
-	out.println("1"+resultJdo.getId());
-	out.println("2"+resultJdo.getUpdateUser());
-	out.println("3"+resultJdo.getWiseAuthorOrg());
-	out.println("4"+resultJdo.getWiseContentOrg());
-	out.println("5"+resultJdo.getWriteUser());
-	out.println("6"+resultJdo.getUpdateDate());
-	out.println("7"+resultJdo.getWriteDate());
-%>
-
-	[ <%=resultJdo.getWiseContent() %> ]  - <%=resultJdo.getWiseAuthor() %><br/>	
-<%
-		}	
+				<tr>
+					<td><%= resultJdo.getId() %> </td>
+					<td><%= resultJdo.getWiseContent() %> </td>
+					<td><%= resultJdo.getWiseAuthor()%> </td>
+					<td><%= resultJdo.getWiseContentOrg()%> </td>
+					<td><%= resultJdo.getWiseAuthorOrg()%> </td>
+					<td><%= resultJdo.getWriteUser()%> </td>
+					<td><%= DateUtil.getShortDate(resultJdo.getWriteDate())%> </td>
+					<td><%= resultJdo.getUpdateUser()%> </td>
+					<td><%= DateUtil.getShortDate(resultJdo.getUpdateDate())%> </td>
+					<td><%= resultJdo.isDelete()%> </td>
+				</tr>
+<%		}
 	}
 %>
-
+    		</table>			
     	</article>
     </section>	
 

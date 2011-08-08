@@ -7,7 +7,7 @@
 
 	<script>
 		function doWrite() {
-			document.form1.actionMethod.value="write";
+			document.form1.action="/write";
 			document.form1.submit();
 		}
 	</script>
@@ -23,12 +23,12 @@
     </header>
 
      
-    	<form name="form1" method="get" >
-			누가    : <input type="text" name="wiseAuthor" /> <br/>
-			말했나  : <input type="text" name="wiseContent" /> <br/>
-			누가 (원문): <input type="text" name="wiseContentOrg" /> <br/>
-			말했나 (원문)  : <input type="text" name="wiseAuthorOrg" /> <br/>
-  	  		<a onclick="doWrite()" href="/write">write</a>
+    	<form name="form1" method="post" action="/write" >
+			누가       : <input type="text" name="wiseAuthor" /> <br/>
+			말했나      : <input type="text" name="wiseContent" /> <br/>
+			누가 (원문)  : <input type="text" name="wiseContentOrg" /> <br/>
+			말했나 (원문) : <input type="text" name="wiseAuthorOrg" /> <br/>
+  	  		<input type="submit">write
     	</form>
 	<footer>
 		<h6>choncheol.appspot.com 촌철살인의 한마디. 2011.08.v001 rkJun (알케이준)</h6>
